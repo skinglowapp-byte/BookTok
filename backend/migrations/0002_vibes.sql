@@ -97,7 +97,7 @@ create table public.user_content_warning_filters (
 -- Log every Vibe Match query for personalization training and analytics.
 -- ============================================================================
 create table public.vibe_match_history (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid references public.profiles(id) on delete cascade,
   query_chips text[] default '{}',                  -- selected vibe ids
   pace_slider int,                                  -- 1-5

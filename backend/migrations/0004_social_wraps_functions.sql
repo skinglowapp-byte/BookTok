@@ -21,7 +21,7 @@ create index follows_following_idx on public.follows (following_id);
 -- Generated wrap card metadata. PNG itself stored in Supabase Storage.
 -- ============================================================================
 create table public.wraps (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references public.profiles(id) on delete cascade,
   period_type text not null,                       -- 'month' | 'year' | 'custom'
   period_start date not null,
@@ -41,7 +41,7 @@ create index wraps_user_idx on public.wraps (user_id, period_start desc);
 -- Tracks Goodreads CSV imports for debugging and re-imports.
 -- ============================================================================
 create table public.imports (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references public.profiles(id) on delete cascade,
   source text not null,                            -- 'goodreads_csv' | 'storygraph_csv' | etc.
   status text not null default 'pending',          -- 'pending' | 'processing' | 'complete' | 'failed'

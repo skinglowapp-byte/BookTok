@@ -2,7 +2,6 @@
 -- Run order: first migration after fresh Supabase project init
 
 -- Extensions
-create extension if not exists "uuid-ossp";
 create extension if not exists "pgcrypto";
 create extension if not exists "vector";
 
@@ -49,7 +48,7 @@ create trigger on_auth_user_created
 -- Normalized author records. Books link via books.author_ids array.
 -- ============================================================================
 create table public.authors (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   name text not null,
   open_library_id text unique,        -- e.g. 'OL12345A'
   bio text,
@@ -65,7 +64,7 @@ create index authors_ol_idx on public.authors (open_library_id);
 -- Core book records sourced from Open Library and user-added editions.
 -- ============================================================================
 create table public.books (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   open_library_id text unique,        -- e.g. 'OL12345W' (work) or 'OL12345M' (edition)
   isbn_13 text,
   isbn_10 text,

@@ -7,7 +7,7 @@
 -- System shelves are auto-created via trigger when profile is created.
 -- ============================================================================
 create table public.shelves (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references public.profiles(id) on delete cascade,
   name text not null,
   slug text not null,                              -- url-safe; system shelves use fixed slugs
@@ -45,7 +45,7 @@ create trigger on_profile_created
 -- A book on a shelf. Same book can be on multiple shelves (e.g. Reading + Owned).
 -- ============================================================================
 create table public.shelf_items (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   shelf_id uuid not null references public.shelves(id) on delete cascade,
   book_id uuid not null references public.books(id) on delete cascade,
   user_id uuid not null references public.profiles(id) on delete cascade,
@@ -105,7 +105,7 @@ create view public.ratings_decimal as
 -- Optional written review attached to a rating.
 -- ============================================================================
 create table public.reviews (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references public.profiles(id) on delete cascade,
   book_id uuid not null references public.books(id) on delete cascade,
   body text not null,
@@ -128,7 +128,7 @@ create index reviews_user_idx on public.reviews (user_id, created_at desc);
 -- Not required for MVP 1 but schema is here so we don't migrate later.
 -- ============================================================================
 create table public.reading_sessions (
-  id uuid primary key default uuid_generate_v4(),
+  id uuid primary key default gen_random_uuid(),
   user_id uuid not null references public.profiles(id) on delete cascade,
   book_id uuid not null references public.books(id) on delete cascade,
   started_at timestamptz not null,
