@@ -5,9 +5,11 @@
   "description": "BookTok backend scripts (seeders, edge function source, etc.)",
   "scripts": {
     "seed:vocab": "tsx seed/seed-vocabulary.ts",
-    "seed:books": "tsx seed/seed-books.ts"
+    "seed:books": "tsx seed/seed-books.ts",
+    "test:extract": "tsx scripts/test-extract.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.40.0",
     "@supabase/supabase-js": "^2.45.0",
     "dotenv": "^16.4.5"
   },
