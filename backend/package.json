@@ -4,7 +4,8 @@
   "private": true,
   "description": "BookTok backend scripts (seeders, edge function source, etc.)",
   "scripts": {
-    "seed:vocab": "tsx seed/seed-vocabulary.ts"
+    "seed:vocab": "tsx seed/seed-vocabulary.ts",
+    "seed:books": "tsx seed/seed-books.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
