@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "supabase": "jsr:@supabase/supabase-js@2"
+  },
+  "tasks": {
+    "serve": "deno run --allow-net --allow-env --allow-read index.ts"
+  }
+}
